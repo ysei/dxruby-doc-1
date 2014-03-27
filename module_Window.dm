@@ -16,9 +16,9 @@ module Window
 
   def draw(x, y, image, z=0) -> nil
     単純描画をします。
-    @param x Integer X座標。
-    @param y Integer Y座標。
-    @param image Image|RenderTarget 描画したいオブジェクト。
+    @param x Integer X座標
+    @param y Integer Y座標
+    @param image Image|RenderTarget 描画元の画像オブジェクト
     @param z Integer|Float 描画順序。
       小さいほど奥になり、同じ値の場合は最初にdrawしたものが一番奥になります。
 
@@ -104,12 +104,12 @@ module Window
     @option :blend
     @option :color
     @option :angle
-    @option :edge Boolean false 袋文字を描画するかどうか。
+    @option :edge bool false 袋文字を描画するかどうか。
     @option :edge_color Array [0,0,0] 袋文字の枠色を指定します。配列で[R, G, B]、それぞれ0～255、省略すると[0, 0, 0]、黒い枠になります。
     @option :edge_width Integer 2 袋文字の枠の幅を0～の数値で指定します。1で1ピクセルとなります。
     @option :edge_level Integer 4 袋文字の枠の濃さを0～の数値で指定します。大きいほど濃くなりますが、幅が大きいほど薄くなります。値の制限はありませんが、目安としては一桁ぐらいが実用範囲でしょう。
-    @option :shadow Boolean false 影を描画するかどうかをtrue/falseで指定します。
-    @option :shadow_edge Boolean false edgeがtrueの場合に、枠の部分に対して影を付けるかどうかをtrue/falseで指定します。trueで枠の影が描かれます。
+    @option :shadow bool false 影を描画するかどうかをtrue/falseで指定します。
+    @option :shadow_edge bool false edgeがtrueの場合に、枠の部分に対して影を付けるかどうかをtrue/falseで指定します。trueで枠の影が描かれます。
     @option :shadow_color Array [0,0,0] 影の色を指定します。配列で[R, G, B]、それぞれ0～255、省略すると[0, 0, 0]、黒い影になります。
     @option :shadow_x Integer font.size/24+1 影の位置を相対座標で指定します。+1は1ピクセル右になります。省略するとフォントサイズ/24+1になります。
     @option :shadow_y Integer font.size/24+1 影の位置を相対座標で指定します。+1は1ピクセル下になります。省略するとフォントサイズ/24+1になります。
@@ -118,7 +118,7 @@ module Window
 
   def draw_morph(x1, y1, x2, y2, x3, y3, x4, y4, image, option={})
     4点を自由に指定してimageを描画できます。これを使うと自在に変形した画像を描画することができます。
-    ただし、実際にはhashで指定するdividexとdivideyの数だけ絵を分割して変形しますので、分割数が少ない場合/描画面積が大きい場合に見え方がぎこちなくなることがあります。その場合は分割数を増やしてください。分割数を増やすと描画枚数が増えるのでパフォーマンスは下がります。
+    ただし、実際にはoptionで指定するdividexとdivideyの数だけ絵を分割して変形しますので、分割数が少ない場合/描画面積が大きい場合に見え方がぎこちなくなることがあります。その場合は分割数を増やしてください。分割数を増やすと描画枚数が増えるのでパフォーマンスは下がります。
     座標はx1から順に右回りで指定してください。順番が違う場合の描画結果は保証されません。
     @param x1 Integer X1座標。
     @param y1 Integer Y1座標。
@@ -320,7 +320,7 @@ module Window
     設定を行わずにWindow.loop、Window.createメソッドを呼び出した場合、
     ウィンドウモードになります。
     フルスクリーンモードは60fps固定となります。
-    @param val Boolean trueを指定するとウィンドウモードで、falseでフルスクリーンモードになります。
+    @param val bool trueを指定するとウィンドウモードで、falseでフルスクリーンモードになります。
   
   
   def real_fps -> Integer
@@ -356,7 +356,7 @@ module Window
     可能な限りの速度で動作し続けます。
     この場合、FPSは高くなりますが、ゲーム全体が遅くなります。
     指定しないとfalseになります。
-    @param val Boolean コマ落ち制御をするかどうか
+    @param val bool コマ落ち制御をするかどうか
   
   
   def bgcolor -> Array

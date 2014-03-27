@@ -4,12 +4,11 @@ class Image
   
   
   def self.new(width, height, color=[0,0,0,0]) -> Image
-    width(幅)/height(高さ)で表されるサイズのImageオブジェクトを生成して返します。
-    color（[a, r, g, b]それぞれ0～255の配列です）を指定すると全体がその色で初期化され、
-    省略すると[0, 0, 0, 0]の透明色となります。
+    Imageオブジェクトを生成して返します。
     @param width  Integer 横幅
     @param height Integer 高さ
-    @param color Array 色[ARGB]
+    @param color Array ARGB順（それぞれ0～255）の配列。指定すると生成時に全体が指定色に塗られます。
+      省略すると[0,0,0,0]の透明色になります。update時、描画処理前にcolor指定色でクリアされます。
   
   def self.load(path, x=nil, y=nil, width=nil, height=nil) -> Image
     画像を読み込み、Imageオブジェクトを生成して返します。
@@ -61,14 +60,13 @@ class Image
   
   def [](x, y) -> Array
     Imageオブジェクトの該当ピクセルの色を配列で取得します。
-    配列は[a, r, g, b]となります。
+    配列はARGB順となります。
     それぞれ0～255の範囲です。
   
   
-  def []=(x, y)
+  def []=(x, y, color)
     Imageオブジェクトの該当ピクセルに色を設定します。
-    colorは配列で、[a, r, g, b]と指定します。
-    それぞれ0～255の範囲です。
+    colorは配列で、ARGB順（0～255）で指定します。
     [r, g, b]で渡すとaは255になります。
   
     
@@ -156,12 +154,12 @@ class Image
     文字コードはSJIS(Ruby1.8の場合)です。
     @param option Hash オプション
     @option :color Array [255,255,255] RGB色配列でそれぞれ0～255、省略すると白文字になります。
-    @option :edge Boolean false 袋文字を描画するかどうか。
+    @option :edge bool false 袋文字を描画するかどうか。
     @option :edge_color Array [0,0,0] 袋文字の枠色を指定します。配列で[R, G, B]、それぞれ0～255、省略すると[0, 0, 0]、黒い枠になります。
     @option :edge_width Integer 2 袋文字の枠の幅を0～の数値で指定します。1で1ピクセルとなります。
     @option :edge_level Integer 4 袋文字の枠の濃さを0～の数値で指定します。大きいほど濃くなりますが、幅が大きいほど薄くなります。値の制限はありませんが、目安としては一桁ぐらいが実用範囲でしょう。
-    @option :shadow Boolean false 影を描画するかどうかをtrue/falseで指定します。
-    @option :shadow_edge Boolean false edgeがtrueの場合に、枠の部分に対して影を付けるかどうかをtrue/falseで指定します。trueで枠の影が描かれます。
+    @option :shadow bool false 影を描画するかどうかをtrue/falseで指定します。
+    @option :shadow_edge bool false edgeがtrueの場合に、枠の部分に対して影を付けるかどうかをtrue/falseで指定します。trueで枠の影が描かれます。
     @option :shadow_color Array [0,0,0] 影の色を指定します。配列で[R, G, B]、それぞれ0～255、省略すると[0, 0, 0]、黒い影になります。
     @option :shadow_x Integer font.size/24+1 影の位置を相対座標で指定します。+1は1ピクセル右になります。省略するとフォントサイズ/24+1になります。
     @option :shadow_y Integer font.size/24+1 影の位置を相対座標で指定します。+1は1ピクセル下になります。省略するとフォントサイズ/24+1になります。
@@ -218,12 +216,12 @@ class Image
     赤成分とα成分を合成するので例えばα255で白と黒のモノクロ画像や、αでアンチエイリアシングされた白黒モノクロ画像などを扱うことができます。白を赤に置き換えても同様です。
     @note 遅いのでリアルタイムで毎フレーム実行することはお勧めしません。
     @option :color Array [255,255,255] RGB色配列でそれぞれ0～255、省略すると白文字になります。
-    @option :edge Boolean false 袋文字を描画するかどうか。
+    @option :edge bool false 袋文字を描画するかどうか。
     @option :edge_color Array [0,0,0] 袋文字の枠色を指定します。配列で[R, G, B]、それぞれ0～255、省略すると[0, 0, 0]、黒い枠になります。
     @option :edge_width Integer 2 袋文字の枠の幅を0～の数値で指定します。1で1ピクセルとなります。
     @option :edge_level Integer 4 袋文字の枠の濃さを0～の数値で指定します。大きいほど濃くなりますが、幅が大きいほど薄くなります。値の制限はありませんが、目安としては一桁ぐらいが実用範囲でしょう。
-    @option :shadow Boolean false 影を描画するかどうかをtrue/falseで指定します。
-    @option :shadow_edge Boolean false edgeがtrueの場合に、枠の部分に対して影を付けるかどうかをtrue/falseで指定します。trueで枠の影が描かれます。
+    @option :shadow bool false 影を描画するかどうかをtrue/falseで指定します。
+    @option :shadow_edge bool false edgeがtrueの場合に、枠の部分に対して影を付けるかどうかをtrue/falseで指定します。trueで枠の影が描かれます。
     @option :shadow_color Array [0,0,0] 影の色を指定します。配列で[R, G, B]、それぞれ0～255、省略すると[0, 0, 0]、黒い影になります。
     @option :shadow_x Integer font.size/24+1 影の位置を相対座標で指定します。+1は1ピクセル右になります。省略するとフォントサイズ/24+1になります。
     @option :shadow_y Integer font.size/24+1 影の位置を相対座標で指定します。+1は1ピクセル下になります。省略するとフォントサイズ/24+1になります。
