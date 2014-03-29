@@ -1,20 +1,86 @@
 ## module Window
 ### 要約
+
 ウィンドウ生成、グラフィック描画、画面更新を実行します。   
 なお、特段の指示がない限り座標は左上を(0,0)とします。
+
+### 目次
+
+<a href='#Window_23loop'>loop</a>
+<a href='#Window_23draw'>draw</a>
+<a href='#Window_23draw_scale'>draw_scale</a>
+<a href='#Window_23draw_rot'>draw_rot</a>
+<a href='#Window_23draw_alpha'>draw_alpha</a>
+<a href='#Window_23draw_add'>draw_add</a>
+<a href='#Window_23draw_sub'>draw_sub</a>
+<a href='#Window_23draw_shader'>draw_shader</a>
+<a href='#Window_23draw_ex'>draw_ex</a>
+<a href='#Window_23draw_font'>draw_font</a>
+<a href='#Window_23draw_font_ex'>draw_font_ex</a>
+<a href='#Window_23draw_morph'>draw_morph</a>
+<a href='#Window_23draw_tile'>draw_tile</a>
+<a href='#Window_23draw_line'>draw_line</a>
+<a href='#Window_23draw_box_fill'>draw_box_fill</a>
+<a href='#Window_23get_screen_shot'>get_screen_shot</a>
+<a href='#Window_23get_load'>get_load</a>
+<a href='#Window_23open_filename'>open_filename</a>
+<a href='#Window_23save_filename'>save_filename</a>
+<a href='#Window_23folder_dialog'>folder_dialog</a>
+<a href='#Window_23create'>create</a>
+<a href='#Window_23sync'>sync</a>
+<a href='#Window_23update'>update</a>
+<a href='#Window_23load_icon'>load_icon</a>
+<a href='#Window_23hWnd'>hWnd</a>
+<a href='#Window_23x'>x</a>
+<a href='#Window_23x_3D'>x=</a>
+<a href='#Window_23y'>y</a>
+<a href='#Window_23y_3D'>y=</a>
+<a href='#Window_23width'>width</a>
+<a href='#Window_23width_3D'>width=</a>
+<a href='#Window_23height'>height</a>
+<a href='#Window_23height_3D'>height=</a>
+<a href='#Window_23caption'>caption</a>
+<a href='#Window_23caption_3D'>caption=</a>
+<a href='#Window_23scale'>scale</a>
+<a href='#Window_23scale_3D'>scale=</a>
+<a href='#Window_23windowed_3F'>windowed?</a>
+<a href='#Window_23windowed_3D'>windowed=</a>
+<a href='#Window_23real_fps'>real_fps</a>
+<a href='#Window_23fps'>fps</a>
+<a href='#Window_23fps_3D'>fps=</a>
+<a href='#Window_23frameskip_3F'>frameskip?</a>
+<a href='#Window_23frameskip_3D'>frameskip=</a>
+<a href='#Window_23bgcolor'>bgcolor</a>
+<a href='#Window_23bgcolor_3D'>bgcolor=</a>
+<a href='#Window_23min_filter'>min_filter</a>
+<a href='#Window_23min_filter_3D'>min_filter=</a>
+<a href='#Window_23mag_filter'>mag_filter</a>
+<a href='#Window_23mag_filter_3D'>mag_filter=</a>
+<a href='#Window_23resize'>resize</a>
+<a href='#Window_23active_3F'>active?</a>
+<a href='#Window_23running_time'>running_time</a>
+<a href='#Window_23get_screen_modes'>get_screen_modes</a>
+<a href='#Window_23get_current_modes'>get_current_modes</a>
+<a href='#Window_23discard'>discard</a>
+<a href='#Window_23decide'>decide</a>
+<a href='#Window_23before_call'>before_call</a>
+<a href='#Window_23after_call'>after_call</a>
 
 ----
 
 ### 特異メソッド
-#### loop { } -> bool
+
+<a name='Window_23loop'></a>
+#### loop{ } -> bool
 * メインループとして渡されたブロックを実行し続けます。  
   デフォルト設定ではウィンドウ(640*480pixel)が作られ、閉じられたら終了します。  
   このループは秒間60回実行(60FPS)になるよう、待ち時間が自動調整されます。
 
 
-----
 
-#### draw  -> nil
+
+<a name='Window_23draw'></a>
+#### draw(x, y, image, z=0) -> nil
 * 単純描画をします。
   * **x** *Integer*
     * X座標
@@ -27,9 +93,10 @@
       小さいほど奥になり、同じ値の場合は最初にdrawしたものが一番奥になります。
 
 
-----
 
-#### draw_scale  -> nil
+
+<a name='Window_23draw_scale'></a>
+#### draw_scale(x, y, image, scale_x, scale_y, center_x=nil, center_y=nil, z=0) -> nil
 * 縦、横の拡大率を指定して描画します。
   * **x** *Integer*
     * X座標
@@ -50,9 +117,10 @@
       小さいほど奥になり、同じ値の場合は最初にdrawしたものが一番奥になります。
 
 
-----
 
-#### draw_rot 
+
+<a name='Window_23draw_rot'></a>
+#### draw_rot(x, y, image, angle, center_x=nil, center_y=nil, z=0)
 * 回転角度と中心を指定して描画します。  
   center_x/center_y省略時は画像の中心を原点として回転します。
   * **x** *Integer*
@@ -72,9 +140,10 @@
       小さいほど奥になり、同じ値の場合は最初にdrawしたものが一番奥になります。
 
 
-----
 
-#### draw_alpha 
+
+<a name='Window_23draw_alpha'></a>
+#### draw_alpha(x, y, image, alpha, z=0)
 * アルファ値を指定して描画します。
   * **x** *Integer*
     * X座標
@@ -89,9 +158,10 @@
       小さいほど奥になり、同じ値の場合は最初にdrawしたものが一番奥になります。
 
 
-----
 
-#### draw_add 
+
+<a name='Window_23draw_add'></a>
+#### draw_add(x, y, image, z=0)
 * 加算合成描画をします。
   * **x** *Integer*
     * X座標
@@ -104,9 +174,10 @@
       小さいほど奥になり、同じ値の場合は最初にdrawしたものが一番奥になります。
 
 
-----
 
-#### draw_sub 
+
+<a name='Window_23draw_sub'></a>
+#### draw_sub(x, y, image, z=0)
 * 減算合成描画をします。
   * **x** *Integer*
     * X座標
@@ -119,9 +190,10 @@
       小さいほど奥になり、同じ値の場合は最初にdrawしたものが一番奥になります。
 
 
-----
 
-#### draw_shader 
+
+<a name='Window_23draw_shader'></a>
+#### draw_shader(x, y, image, shader, z=0)
 * シェーダ処理を適用して描画します。
   * **x** *Integer*
     * X座標
@@ -136,9 +208,10 @@
       小さいほど奥になり、同じ値の場合は最初にdrawしたものが一番奥になります。
 
 
-----
 
-#### draw_ex 
+
+<a name='Window_23draw_ex'></a>
+#### draw_ex(x, y, image, option={})
 * 拡縮、回転、半透明、加算合成を一括指定して描画します。
   * **x** *Integer*
     * X座標
@@ -169,9 +242,10 @@
           小さいほど奥になり、同じ値の場合は最初にdrawしたものが一番奥になります。
 
 
-----
 
-#### draw_font 
+
+<a name='Window_23draw_font'></a>
+#### draw_font(x, y, string, font, option={})
 * DirectX APIで文字を描画します。  
   改行文字が有効となります。  
   単純文字描画であるため、描画は高速です。
@@ -206,9 +280,10 @@
           小さいほど奥になり、同じ値の場合は最初にdrawしたものが一番奥になります。
 
 
-----
 
-#### draw_font_ex 
+
+<a name='Window_23draw_font_ex'></a>
+#### draw_font_ex(x, y, string, font, option={})
 * 内部でImageオブジェクトを生成、Image#draw_font_exを呼び出して描画し、  
   それを画面にWindow.draw_exで高品質な文字の描画をします。  
   改行文字は無視されます。
@@ -259,11 +334,15 @@
       * **:z** *Integer|Float* (default: 0)
         * 描画順序。  
           小さいほど奥になり、同じ値の場合は最初にdrawしたものが一番奥になります。
+* SEE ALSO
+  * <a href='#Window_23draw_font'>Window#draw_font</a>
 
 
-----
 
-#### draw_morph 
+
+
+<a name='Window_23draw_morph'></a>
+#### draw_morph(x1, y1, x2, y2, x3, y3, x4, y4, image, option={})
 * 4点を自由に指定してimageを描画できます。これを使うと自在に変形した画像を描画することができます。  
   ただし、実際にはoptionで指定するdividexとdivideyの数だけ絵を分割して変形しますので、分割数が少ない場合/描画面積が大きい場合に見え方がぎこちなくなることがあります。その場合は分割数を増やしてください。分割数を増やすと描画枚数が増えるのでパフォーマンスは下がります。  
   座標はx1から順に右回りで指定してください。順番が違う場合の描画結果は保証されません。
@@ -302,9 +381,10 @@
         * [R, G, B]で、それぞれ0～255、省略すると[255, 255, 255](白文字)になります。
 
 
-----
 
-#### draw_tile 
+
+<a name='Window_23draw_tile'></a>
+#### draw_tile(base_x, base_y, map, image_array, start_x, start_y, size_x, size_y, z=0)
 * タイルチップと二次元配列を使ってマップ描画をします。nilが指定できるようになりました。  
   画像のサイズはimage_arrの先頭の画像から取得します。すべて同じサイズのImageオブジェクトを使用してください。  
   マップ配列の長さが要素によって異なる場合の動作は未定義です。長さはすべて一致させてください。  
@@ -332,9 +412,10 @@
       小さいほど奥になり、同じ値の場合は最初にdrawしたものが一番奥になります。
 
 
-----
 
-#### draw_line 
+
+<a name='Window_23draw_line'></a>
+#### draw_line(x1, y1, x2, y2, color, z=0)
 * 画面に(x1, y1)～(x2, y2)を結ぶ線を引きます。
   * **x1** *Integer*
     * 開始X座標。
@@ -351,9 +432,10 @@
       小さいほど奥になり、同じ値の場合は最初にdrawしたものが一番奥になります。
 
 
-----
 
-#### draw_box_fill 
+
+<a name='Window_23draw_box_fill'></a>
+#### draw_box_fill(x1, y1, x2, y2, color, z=0)
 * 画面に(x1, y1)～(x2, y2)を塗りつぶす矩形を描画します。
   * **x1** *Integer*
     * 開始X座標。
@@ -370,9 +452,10 @@
       小さいほど奥になり、同じ値の場合は最初にdrawしたものが一番奥になります。
 
 
-----
 
-#### get_screen_shot 
+
+<a name='Window_23get_screen_shot'></a>
+#### get_screen_shot(path, format=FORMAT_JPG)
 * スクリーンショットをファイルに保存します。  
   省略するとFORMAT_JPGになります。
   * **path** *String*
@@ -381,16 +464,18 @@
     * 保存形式。FORMAT_JPG/FORMAT_PNG/FORMAT_BMP/FORMAT_DDSのいずれかを指定してください。
 
 
-----
 
-#### get_load  -> Float
+
+<a name='Window_23get_load'></a>
+#### get_load -> Float
 * 現在の処理負荷を％で取得します。  
   fps=で指定したFPSでの1フレームのうち、どれだけ処理時間を使っているかを表しています。
 
 
-----
 
-#### open_filename  -> String|nil
+
+<a name='Window_23open_filename'></a>
+#### open_filename(filter, title) -> String|nil
 * ファイルオープンダイアログを表示します。  
   ファイル名の文字列が返ってきます。文字列の文字コードはRuby1.8の場合はSJISです。  
   Ruby1.9以降ではEncoding.default_internalのものに変換されます。nilの場合はSJISです。  
@@ -402,9 +487,10 @@
     * ダイアログのタイトルバーに表示される文字列を設定します。
 
 
-----
 
-#### save_filename  -> String|nil
+
+<a name='Window_23save_filename'></a>
+#### save_filename(filter, title) -> String|nil
 * ファイルセーブダイアログを表示します。  
   ファイル名の文字列が返ってきます。文字列の文字コードはRuby1.8の場合はSJISです。  
   Ruby1.9以降ではEncoding.default_internalのものに変換されます。nilの場合はSJISです。  
@@ -416,9 +502,10 @@
     * ダイアログのタイトルバーに表示される文字列を設定します。
 
 
-----
 
-#### folder_dialog  -> String|nil
+
+<a name='Window_23folder_dialog'></a>
+#### folder_dialog(title, default_dir) -> String|nil
 * フォルダダイアログを表示します。  
   選択したディレクトリ名の文字列が返ってきます。文字列の文字コードはRuby1.8の場合はSJISです。  
   Ruby1.9以降ではEncoding.default_internalのものに変換されます。nilの場合はSJISです。  
@@ -430,52 +517,59 @@
     * 初期表示時に選択されるディレクトリを設定します。
 
 
-----
 
-#### create 
+
+<a name='Window_23create'></a>
+#### create
 * ウィンドウを作成します。  
   Window.loopの初めに同じ処理がされていますので、Window.loopを使わずに自分でゲームループを組み立てるときだけ使ってください。
 
 
-----
 
-#### sync 
+
+<a name='Window_23sync'></a>
+#### sync
 * Window.fps=で指定されたfpsになるようにウェイトを入れます。  
   Window.loopの中で同じ処理がされていますので、Window.loopを使わずに自分でゲームループを組み立てるときだけ使ってください。
 
 
-----
 
-#### update 
+
+<a name='Window_23update'></a>
+#### update
 * 画面を更新します。  
   Window.loopの中で同じ処理がされていますので、Window.loopを使わずに自分でゲームループを組み立てるときだけ使ってください。
 
 
-----
 
-#### load_icon 
+
+<a name='Window_23load_icon'></a>
+#### load_icon(path)
 * 16*16*4bppの画像ファイルを読み込み、ウィンドウ左上のアイコンに設定します。  
   指定できるのは拡張子が.icoのファイルです。
   * **path** *String*
     * ファイルパス。
 
 
-----
 
-#### hWnd  -> Integer
+
+<a name='Window_23hWnd'></a>
+#### hWnd -> Integer
 * ウィンドウハンドルを取得します。  
   Window.loop、Window.createを実行する前に使用可能です。
 
 
-----
 
-#### x  -> Integer
+
+<a name='Window_23x'></a>
+#### x -> Integer
 * ウィンドウの表示位置のX座標を取得します。
 
 
-----
 
-#### x= 
+
+<a name='Window_23x_3D'></a>
+#### x=(pos)
 * ウィンドウの表示位置のX座標を設定します。  
   Window.loop、Window.createメソッドを呼び出す前のみ可能です。  
   表示位置設定を行わずにWindow.loop、Window.createメソッドを呼び出した場合、OSデフォルト位置に設定されます。
@@ -483,15 +577,17 @@
     * ウィンドウのX座標。
 
 
-----
 
-#### y  -> Integer
+
+<a name='Window_23y'></a>
+#### y -> Integer
 * ウィンドウの表示位置のY座標を取得します。
 
 
-----
 
-#### y= 
+
+<a name='Window_23y_3D'></a>
+#### y=(pos)
 * ウィンドウの表示位置のY座標を設定します。  
   Window.loop、Window.createメソッドを呼び出す前のみ可能です。  
   表示位置設定を行わずにWindow.loop、Window.createメソッドを呼び出した場合、OSデフォルト位置に設定されます。
@@ -499,49 +595,61 @@
     * ウィンドウのY座標。
 
 
-----
 
-#### width  -> Integer
+
+<a name='Window_23width'></a>
+#### width -> Integer
 * ウィンドウの画面幅を取得します。
 
 
-----
 
-#### width= 
+
+<a name='Window_23width_3D'></a>
+#### width=(size)
 * ウィンドウの画面横幅を設定します。  
   Window.loop、Window.createメソッドを呼び出す前のみ可能です。  
   サイズ設定を行わずにWindow.loop、Window.createメソッドを呼び出した場合、  
   幅640ピクセルに設定されます。
   * **size** *Integer*
     * ウィンドウの画面横幅。
+* SEE ALSO
+  * <a href='#Window_23resize'>Window#resize</a>
 
 
-----
 
-#### height  -> Integer
+
+
+<a name='Window_23height'></a>
+#### height -> Integer
 * ウィンドウの画面幅を取得します。
 
 
-----
 
-#### height= 
+
+<a name='Window_23height_3D'></a>
+#### height=(size)
 * ウィンドウの画面縦幅を設定します。  
   Window.loop、Window.createメソッドを呼び出す前のみ可能です。  
   サイズ設定を行わずにWindow.loop、Window.createメソッドを呼び出した場合、  
   高さ480ピクセルに設定されます。
   * **size** *Integer*
     * ウィンドウの画面縦幅。
+* SEE ALSO
+  * <a href='#Window_23resize'>Window#resize</a>
 
 
-----
 
-#### caption  -> String
+
+
+<a name='Window_23caption'></a>
+#### caption -> String
 * タイトルバーのキャプションを取得します。
 
 
-----
 
-#### caption= 
+
+<a name='Window_23caption_3D'></a>
+#### caption=(title)
 * タイトルバーのキャプションを設定します。  
   設定を行わずにWindow.loop、Window.createメソッドを呼び出した場合、  
   "DXRubyApplication"となります。  
@@ -552,15 +660,20 @@
     * タイトルバーのキャプション。
 
 
-----
 
-#### scale  -> Float
+
+<a name='Window_23scale'></a>
+#### scale -> Float
 * ウィンドウの画面サイズに対する拡大率を取得します。
+* SEE ALSO
+  * <a href='#Window_23scale_3D'>Window#scale=</a>
 
 
-----
 
-#### scale= 
+
+
+<a name='Window_23scale_3D'></a>
+#### scale=(val)
 * ウィンドウの画面サイズに対する拡大率を設定します。  
   縦横同じ比率が適用されます。  
   width、heightで指定した値に、この値を掛けたものが  
@@ -569,20 +682,25 @@
   1倍になります。
   * **val** *Float*
     * ウィンドウの拡大率。
+* SEE ALSO
+  * <a href='#Window_23scale'>Window#scale</a>
 
 
-----
 
-#### windowed?  -> bool
+
+
+<a name='Window_23windowed_3F'></a>
+#### windowed? -> bool
 * ウィンドウモード/フルスクリーンモードを取得します。  
   設定を行わずにWindow.loop、Window.createメソッドを呼び出した場合、  
   ウィンドウモードになります。  
   フルスクリーンモードは60fps固定となります。
 
 
-----
 
-#### windowed= 
+
+<a name='Window_23windowed_3D'></a>
+#### windowed=(val)
 * ウィンドウモード/フルスクリーンモードを設定します。  
   設定を行わずにWindow.loop、Window.createメソッドを呼び出した場合、  
   ウィンドウモードになります。  
@@ -591,21 +709,32 @@
     * trueを指定するとウィンドウモードで、falseでフルスクリーンモードになります。
 
 
-----
 
-#### real_fps  -> Integer
+
+<a name='Window_23real_fps'></a>
+#### real_fps -> Integer
 * 画面の更新頻度(1秒間に何回更新するか)を取得します。
+* SEE ALSO
+  * <a href='#Window_23fps'>Window#fps</a>
+  * <a href='#Window_23fps_3D'>Window#fps=</a>
 
 
-----
 
-#### fps  -> Integer
+
+
+<a name='Window_23fps'></a>
+#### fps -> Integer
 * 画面の更新頻度(1秒間に何回更新するか)を取得します。
+* SEE ALSO
+  * <a href='#Window_23real_fps'>Window#real_fps</a>
+  * <a href='#Window_23fps_3D'>Window#fps=</a>
 
 
-----
 
-#### fps= 
+
+
+<a name='Window_23fps_3D'></a>
+#### fps=(val)
 * 設定を行わずにWindow.loop、Window.createメソッドを呼び出した場合、  
   60fpsに設定されます。  
   処理が重くて更新頻度が保てない場合、自動的に描画をスキップします。  
@@ -614,15 +743,17 @@
     * 秒間の画面更新頻度。
 
 
-----
 
-#### frameskip?  -> bool
+
+<a name='Window_23frameskip_3F'></a>
+#### frameskip? -> bool
 * コマ落ち制御をするかどうかを取得します。
 
 
-----
 
-#### frameskip= 
+
+<a name='Window_23frameskip_3D'></a>
+#### frameskip=(val)
 * コマ落ち制御をするかどうかを設定します。  
   trueを指定すると、fps=で指定したFPSに処理が間に合わない場合、  
   1フレームだけ描画処理を省きます。  
@@ -635,29 +766,37 @@
     * コマ落ち制御をするかどうか
 
 
-----
 
-#### bgcolor  -> Array
+
+<a name='Window_23bgcolor'></a>
+#### bgcolor -> Array
 * 毎フレーム自動的に実行される画面のクリアに使う色を取得します。
 
 
-----
 
-#### bgcolor= 
+
+<a name='Window_23bgcolor_3D'></a>
+#### bgcolor=(color)
 * 毎フレーム自動的に実行される画面のクリアに使う色を設定します。
   * **color** *Array*
     * [R, G, B]でそれぞれ0～255
 
 
-----
 
-#### min_filter  -> Constant
+
+<a name='Window_23min_filter'></a>
+#### min_filter -> Constant
 * draw_scaleやdraw_exのscale_x/yキーで縮小する場合に使用されるフィルタを取得します。
+* SEE ALSO
+  * <a href='#Window_23min_filter_3D'>Window#min_filter=</a>
+  * <a href='#Window_23mag_filter'>Window#mag_filter</a>
 
 
-----
 
-#### min_filter= 
+
+
+<a name='Window_23min_filter_3D'></a>
+#### min_filter=(filter)
 * draw_scaleやdraw_exのscale_x/yキーで縮小する場合に使用されるフィルタを  
   設定します。  
   この設定はWindow.scale=には反映されません。
@@ -668,16 +807,22 @@
       TEXF_GAUSSIANQUAD 4-サンプルガウスフィルタ
 
 
-----
 
-#### mag_filter  -> Constant
+
+<a name='Window_23mag_filter'></a>
+#### mag_filter -> Constant
 * draw_scaleやdraw_exのscale_x/yキーで拡大する場合に使用されるフィルタを  
   取得します。
+* SEE ALSO
+  * <a href='#Window_23mag_filter_3D'>Window#mag_filter=</a>
+  * <a href='#Window_23min_filter'>Window#min_filter</a>
 
 
-----
 
-#### mag_filter= 
+
+
+<a name='Window_23mag_filter_3D'></a>
+#### mag_filter=(filter)
 * draw_scaleやdraw_exのscale_x/yキーで拡大する場合に使用されるフィルタを  
   設定します。  
   この設定はWindow.scale=には反映されません。
@@ -688,9 +833,10 @@
       TEXF_GAUSSIANQUAD 4-サンプルガウスフィルタ
 
 
-----
 
-#### resize 
+
+<a name='Window_23resize'></a>
+#### resize(width, height)
 * ウィンドウのサイズを変更します。  
   このメソッドはウィンドウ生成後でも実行することができます。  
   フルスクリーンで実行する場合、  
@@ -700,45 +846,61 @@
     * ウィンドウの横幅。
   * **height** *Integer*
     * ウィンドウの縦幅。
+* SEE ALSO
+  * <a href='#Window_23get_screen_modes'>Window#get_screen_modes</a>
 
 
-----
 
-#### active?  -> bool
+
+
+<a name='Window_23active_3F'></a>
+#### active? -> bool
 * ウィンドウがアクティブかどうかを返します。  
   非アクティブ状態の場合に一時停止するなどの場合に使います。
 
 
-----
 
-#### running_time  -> Integer
+
+<a name='Window_23running_time'></a>
+#### running_time -> Integer
 * ウィンドウを生成してからの経過時間をミリ秒単位で返します。  
   ループ中のどこで何回実行してもそのフレームの開始時点の時間が返ります。
 
 
-----
 
-#### get_screen_modes  -> [[width, height, refreshrate], ...]
+
+<a name='Window_23get_screen_modes'></a>
+#### get_screen_modes -> [[width, height, refreshrate], ...]
 * フルスクリーン時に使用可能な解像度を返します。
 
 
-----
 
-#### get_current_modes  -> [width, height, refreshrate]
+
+<a name='Window_23get_current_modes'></a>
+#### get_current_modes -> [width, height, refreshrate]
 * 現在の解像度を返します。
 
 
-----
 
-#### discard 
+
+<a name='Window_23discard'></a>
+#### discard
 * Window.draw系メソッドで描画した絵は描画予約され、  
   Window.loopを回るときかWindow.update時に実際に描画されますが、  
   その描画予約を取り消します。
+* SEE ALSO
+  * <a href='#Window_23decide'>Window#decide</a>
+
+* NOTE
+  * RenderTarget#decideを実行した場合、実行前の描画予約は消去されません。  
+    Window.decideによって確定された内容は取り消されません。
 
 
-----
 
-#### decide 
+
+
+<a name='Window_23decide'></a>
+#### decide
 * Window.draw系メソッドで描画した絵は描画予約されて、  
   Window.loopを回るときかWindow.update時に実際に描画されますが、  
   その時点での描画予約を確定し、Window.discardで取り消されなくします。  
@@ -746,9 +908,10 @@
   これを実行しないと描画されないということではありません。 
 
 
-----
 
-#### before_call  -> Hash
+
+<a name='Window_23before_call'></a>
+#### before_call -> Hash
 * ハッシュオブジェクトを返します。  
   このハッシュオブジェクトのキーに識別用オブジェクトを、  
   値にProcやMethodオブジェクトを格納しておくと、  
@@ -759,11 +922,15 @@
   識別用オブジェクトは他とぶつからなければ何でもよく、  
   削除するときに使う程度になります。  
   ループ分解している場合、before_callはInput.update時に呼び出されます。
+* SEE ALSO
+  * <a href='#Window_23after_call'>Window#after_call</a>
 
 
-----
 
-#### after_call  -> Hash
+
+
+<a name='Window_23after_call'></a>
+#### after_call -> Hash
 * ハッシュオブジェクトを返します。  
   このハッシュオブジェクトのキーに識別用オブジェクトを、  
   値にProcやMethodオブジェクトを格納しておくと、  
@@ -774,5 +941,9 @@
   識別用オブジェクトは他とぶつからなければ何でもよく、  
   削除するときに使う程度になります。  
   ループ分解している場合、after_callはWindow.update時に呼び出されます。
+* SEE ALSO
+  * <a href='#Window_23before_call'>Window#before_call</a>
+
+
 
 

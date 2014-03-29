@@ -30,7 +30,7 @@ class Font
   
   def self.default -> Font
     デフォルトフォントを取得します。起動時にはFont.new(24)で生成されたフォントオブジェクトが設定されています。
-    @see self.default=
+    @see default=
   
   
   def self.default=(font)
@@ -38,7 +38,7 @@ class Font
     現在、デフォルトフォントとは言っても描画時にフォントを省略することはできません。
     いちいちフォントを生成せずにFont.defaultと指定できるというだけです。
     @param font Font フォントオブジェクト
-    @see self.default
+    @see default
   
   
   def dispose

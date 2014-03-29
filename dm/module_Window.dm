@@ -93,9 +93,7 @@ module Window
     内部でImageオブジェクトを生成、Image#draw_font_exを呼び出して描画し、
     それを画面にWindow.draw_exで高品質な文字の描画をします。
     改行文字は無視されます。
-    @see DXRuby::Window::draw_font
-    @see DXRuby::Image::draw_font
-    @see DXRuby::Image::draw_font_ex
+    @see draw_font
     @option :scale_x
     @option :scale_y
     @option :center_x
@@ -325,14 +323,14 @@ module Window
   
   def real_fps -> Integer
     画面の更新頻度(1秒間に何回更新するか)を取得します。
-    @see Window.fps
-    @see Window.fps=
+    @see fps
+    @see fps=
   
   
   def fps -> Integer
     画面の更新頻度(1秒間に何回更新するか)を取得します。
-    @see Window.real_fps
-    @see Window.fps=
+    @see real_fps
+    @see fps=
   
   
   def fps=(val)

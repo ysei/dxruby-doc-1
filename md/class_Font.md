@@ -1,12 +1,30 @@
-## module Font
+## class Font
 ### 要約
+
 フォントを表すクラスです。  
 Window.drawFontの引数として使います。
+
+### 目次
+
+<a href='#Font.new'>new</a>
+<a href='#Font.install'>install</a>
+<a href='#Font.default'>default</a>
+<a href='#Font.default_3D'>default=</a>
+<a href='#Font_23dispose'>dispose</a>
+<a href='#Font_23disposed_3F'>disposed?</a>
+<a href='#Font_23get_width'>get_width</a>
+<a href='#Font_23size'>size</a>
+<a href='#Font_23fontname'>fontname</a>
+<a href='#Font_23italic'>italic</a>
+<a href='#Font_23weight'>weight</a>
+<a href='#Font_23info'>info</a>
 
 ----
 
 ### 特異メソッド
-#### new 
+
+<a name='Font.new'></a>
+#### new(size, font_name="", option={})
 * 　等幅フォントの場合、描画される文字のサイズは全角文字で幅・高さともにピクセル数＝size（半角文字は幅がsizeの半分）となります。  
   　プロポーショナルフォントの場合は文字ごとに幅が異なりますので、描画される横幅は不明となりますが、Font#getWidthメソッドで事前に取得することができます。
   * **size** *Integer*
@@ -22,11 +40,15 @@ Window.drawFontの引数として使います。
           0～1000の数字を100刻みで設定すると、文字の太さが変わります。trueの太さは1000、falseは400です。
       * **:italic** *bool* (default: false)
         * イタリック体にするかどうか。
+* NOTE
+  * イタリック体にすると右に傾く分だけ幅は広がりますが、getWidthではその増分は取得できません。
 
 
-----
 
-#### install 
+
+
+<a name='Font.install'></a>
+#### install(path)
 * 指定されたフォントファイルを、一時的にシステムにインストールします。  
   このメソッドを実行すると、ユーザーのシステムにインストールされていないファイルでも、Font.newで使用することができるようになります。  
   プログラムを終了すると自動的にアンインストールされた状態になります。  
@@ -37,41 +59,53 @@ Window.drawFontの引数として使います。
     * フォントファイルのパス
 
 
-----
 
-#### default  -> Font
+
+<a name='Font.default'></a>
+#### default -> Font
 * デフォルトフォントを取得します。起動時にはFont.new(24)で生成されたフォントオブジェクトが設定されています。
+* SEE ALSO
+  * <a href='#Font.default_3D'>Font.default=</a>
 
 
-----
 
-#### default= 
+
+
+<a name='Font.default_3D'></a>
+#### default=(font)
 * デフォルトフォントを設定します。  
   現在、デフォルトフォントとは言っても描画時にフォントを省略することはできません。  
   いちいちフォントを生成せずにFont.defaultと指定できるというだけです。
   * **font** *Font*
     * フォントオブジェクト
+* SEE ALSO
+  * <a href='#Font.default'>Font.default</a>
+
 
 
 ----
 
 ### インスタンスメソッド
-#### dispose 
+
+<a name='Font_23dispose'></a>
+#### dispose
 * selfのフォントリソースを解放します。  
   使わなくなったデータをdisposeしておくと、PCのメインメモリを節約することができ、  
   また、GC時の負荷も軽くなります。  
   dispose後、そのオブジェクトのメソッドを呼び出すと例外が発生します。
 
 
-----
 
-#### disposed?  -> bool
+
+<a name='Font_23disposed_3F'></a>
+#### disposed? -> bool
 * selfがdisposeされているかどうかをtrue/falseで返します。
 
 
-----
 
-#### get_width  -> Integer
+
+<a name='Font_23get_width'></a>
+#### get_width(text) -> Integer
 * selfのフォントで描画した場合に横幅が何pixelになるかを計算して返します。  
   プロポーショナルフォントの場合に描画サイズを計算したい時に使います。  
   このメソッドでは改行文字は無視されます。
@@ -79,33 +113,38 @@ Window.drawFontの引数として使います。
     * 描画対象の文字列
 
 
-----
 
-#### size  -> Integer
+
+<a name='Font_23size'></a>
+#### size -> Integer
 * Font.newで指定されたFontオブジェクトのサイズを返します。
 
 
-----
 
-#### fontname  -> String
+
+<a name='Font_23fontname'></a>
+#### fontname -> String
 * Font.newで指定されたFontオブジェクトのフォント名を返します。
 
 
-----
 
-#### italic  -> bool
+
+<a name='Font_23italic'></a>
+#### italic -> bool
 * Fontオブジェクトのイタリック指定フラグを返します。
 
 
-----
 
-#### weight  -> bool|Integer
+
+<a name='Font_23weight'></a>
+#### weight -> bool|Integer
 * Font.newで指定されたFontオブジェクトの太さを返します。
 
 
-----
 
-#### info  -> Struct
+
+<a name='Font_23info'></a>
+#### info(text) -> Struct
 * 渡された文字列の最初の一文字に対して、グリフパラメータを取得します。パラメータが設定されたStructオブジェクトが返ります。  
   プロポーショナルフォントに関して幅を正確に取得するにはこの情報を参照する必要があります。  
   返されるStructオブジェクトには以下の項目があり、値がセットされています。  
@@ -119,6 +158,7 @@ Window.drawFontの引数として使います。
   tm_descent・・・ベースラインから空白を含む下端までの高さを表します。
   * **text** *String*
     * 描画対象の文字列
+
 
 
 

@@ -36,21 +36,18 @@ module Input
       K_RIGHT
       K_DOWN
       これらの他はキーコード定数表を参照してください
-    @see DXRuby::Keycode
     @see key_push?
     @see key_release?
 
 
   def key_push?(key_code) -> bool
     キーボードのキーの押下状態として押した瞬間のみtrueを返します。
-    @see DXRuby::Keycode
     @see key_down?
     @see key_release?
     
 
   def key_release?(key_code) -> bool
     キーボードのキーの押下状態として離した瞬間のみtrueを返します。
-    @see DXRuby::Keycode
     @see key_down?
     @see key_push?
   
@@ -97,7 +94,7 @@ module Input
   
   
   def set_repeat(wait, interval)
-    keyPush?、padPush?メソッドを、オートリピートモードにします。
+    key_push?、pad_push?メソッドを、オートリピートモードにします。
     両方を1にすると毎フレーム入力、つまりkeyDown?/padDown?と同じ動作になります。
     両方を0にすると解除です。
     @param wait Integer 初めの入力があってからリピートを開始するまでの時間（フレーム数）です。
